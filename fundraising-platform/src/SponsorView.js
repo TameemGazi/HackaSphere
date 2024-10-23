@@ -14,8 +14,8 @@ const SponsorView = ({ hackathons, onSponsorClick }) => {
             <p>{hackathon.description}</p>
             <p><strong>Start Date:</strong> {hackathon.startDate}</p>
             <p><strong>End Date:</strong> {hackathon.endDate}</p>
-            <p><strong>Target Amount:</strong> {hackathon.targetAmount} ETH</p>
-            <p><strong>Wallet Address:</strong> {hackathon.walletAddress} ETH</p>
+            <p><strong>Target Amount:</strong> {hackathon.targetAmount} HACKSP</p>
+            <p><strong>Wallet Address:</strong> {hackathon.walletAddress} </p>
             <button onClick={() => onSponsorClick(hackathon)}>Sponsor</button>
           </div>
         ))

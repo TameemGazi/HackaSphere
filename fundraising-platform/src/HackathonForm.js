@@ -71,7 +71,7 @@ const HackathonForm = ({ onSubmit }) => {
       <input
         type="number"
         name="targetAmount"
-        placeholder="Target Amount (ETH)"
+        placeholder="Target Amount (HACKSP)"
         value={hackathon.targetAmount}
         onChange={handleChange}
         required
