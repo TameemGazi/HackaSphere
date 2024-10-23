@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './HackathonForm.css';
 
 const HackathonForm = ({ onSubmit }) => {
@@ -7,8 +7,17 @@ const HackathonForm = ({ onSubmit }) => {
     description: '',
     startDate: '',
     endDate: '',
-    targetAmount: ''
+    targetAmount: '',
+    walletAddress: ''
   });
+
+  // Load stored form data from localStorage on component mount (if any)
+  useEffect(() => {
+    const storedHackathon = JSON.parse(localStorage.getItem('hackathonFormData'));
+    if (storedHackathon) {
+      setHackathon(storedHackathon);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +26,14 @@ const HackathonForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Call onSubmit with the hackathon details
     onSubmit(hackathon);
-    setHackathon({ name: '', description: '', startDate: '', endDate: '', targetAmount: '' });
+
+    // Store hackathon data in localStorage
+    localStorage.setItem('hackathonFormData', JSON.stringify(hackathon));
+
+    // Clear the form after submission
+    setHackathon({ name: '', description: '', startDate: '', endDate: '', targetAmount: '', walletAddress: '' });
   };
 
   return (
@@ -58,6 +73,14 @@ const HackathonForm = ({ onSubmit }) => {
         name="targetAmount"
         placeholder="Target Amount (ETH)"
         value={hackathon.targetAmount}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="text"
+        name="walletAddress"
+        placeholder="Fund Wallet Address"
+        value={hackathon.walletAddress}
         onChange={handleChange}
         required
       />
